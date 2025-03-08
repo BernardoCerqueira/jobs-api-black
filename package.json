@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "create-test-db": "NODE_ENV=test sequelize-cli db:create",
-    "drop-test-db": "NODE_ENV=test sequelize-cli db:drop",
+    "create-test-db": "sequelize-cli db:create",
+    "drop-test-db": "sequelize-cli db:drop",
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
     "test": "jest --watchAll"
   },

@@ -1,4 +1,6 @@
 import { Options, Sequelize } from 'sequelize'
+import dotenv from "dotenv"
+dotenv.config()
 
 export function connect() {
   const dbUrl = process.env.DATABASE_URL
