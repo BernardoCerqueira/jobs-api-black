@@ -56,14 +56,14 @@ const candidatesController = {
             const candidate = await Candidate.findByPk(id)
 
             if (candidate === null) {
-                return res.status(404).json({ message: 'Candidato não encontrado' })
+                return res.status(404).json({ message: 'Candidato não encontrado!' })
             }
 
-            candidate.name = name
-            candidate.bio = bio
-            candidate.email = email
-            candidate.phone = phone
-            candidate.openToWork = openToWork
+            if(name) candidate.name = name
+            if(bio) candidate.bio = bio
+            if(email) candidate.email = email
+            if(phone) candidate.phone = phone
+            if(openToWork) candidate.openToWork = openToWork
 
             await candidate.save()
 
