@@ -23,7 +23,7 @@ const companiesController = {
                 website,
                 email,
             })
-    
+
             return res.status(201).json(company)
         } catch (err) {
             if (err instanceof Error) {
@@ -50,6 +50,9 @@ const companiesController = {
         const { name, bio, website, email } = req.body
 
         try {
+            const company = await Company.findByPk(id)
+            if (company === null) return res.status(404).json({ message: "Empresa não encontrada!" })
+
             const [affectedRows, companies] = await Company.update({
                 name,
                 bio,
@@ -59,7 +62,7 @@ const companiesController = {
                 where: { id },
                 returning: true
             })
-    
+
             return res.json(companies[0])
         } catch (err) {
             if (err instanceof Error) {
@@ -75,7 +78,7 @@ const companiesController = {
             await Company.destroy({
                 where: { id: id }
             })
-    
+
             return res.status(204).send()
         } catch (err) {
             if (err instanceof Error) {
