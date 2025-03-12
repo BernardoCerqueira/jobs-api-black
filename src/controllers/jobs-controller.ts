@@ -90,9 +90,14 @@ const jobsController = {
         const { candidateId } = req.body
 
         try {
+            if(candidateId === undefined) return res.status(400).json({ message: 'candidateId é obrigatório' })
+
             const job = await Job.findByPk(jobId)
 
             if (job === null) return res.status(404).json({ message: 'Vaga de emprego não encontrada' })
+
+            const candidateAlreadyAdded = await job.hasCandidate(candidateId)
+            if(candidateAlreadyAdded) return res.status(400).json({message: "Candidato já cadastrado"})
 
             await job.addCandidate(candidateId)
 
